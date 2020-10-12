@@ -12,7 +12,6 @@ use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
 {
-    public $successStatus = 200;
 
     /**
      * Register api
@@ -33,7 +32,7 @@ class UserController extends Controller
         //asasa
         $success['token'] =  $this->user->createToken('MyApp')->accessToken;
         $success['name'] =  $this->user->name;
-        return response()->json(['success'=>$success], $this->successStatus);
+        return response()->json(['success'=>$success]);
     }
 
     /**
@@ -44,10 +43,10 @@ class UserController extends Controller
 
     public function login(LoginStore $request){
 
-        if(Auth::attempt($request)){
+        if(Auth::attempt($request->all())){
             $user = Auth::user();
             $success['token'] =  $user->createToken('MyApp')-> accessToken;
-            return response()->json(['success' => $success], $this-> successStatus);
+            return response()->json(['success' => $success]);
         }
         else{
             return response()->json(['error'=>'Unauthorised'], 401);
@@ -63,6 +62,6 @@ class UserController extends Controller
     public function all()
     {
         $user = Auth::user();
-        return response()->json(['success' => $user], $this-> successStatus);
+        return response()->json(['success' => $user]);
     }
 }
