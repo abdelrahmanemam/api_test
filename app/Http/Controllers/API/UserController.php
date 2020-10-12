@@ -30,7 +30,7 @@ class UserController extends Controller
 
         $this->user->create($request->all());
 
-
+        //asasa
         $success['token'] =  $this->user->createToken('MyApp')->accessToken;
         $success['name'] =  $this->user->name;
         return response()->json(['success'=>$success], $this->successStatus);
