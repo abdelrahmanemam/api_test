@@ -156,7 +156,7 @@
       <workItem from="1602425599169" duration="4195000" />
       <workItem from="1602430186301" duration="4929000" />
       <workItem from="1602494044029" duration="1348000" />
-      <workItem from="1602501274648" duration="5888000" />
+      <workItem from="1602501274648" duration="9322000" />
     </task>
     <servers />
   </component>
@@ -164,6 +164,10 @@
     <option name="version" value="3" />
   </component>
   <component name="WindowStateProjectService">
+    <state x="410" y="50" width="526" height="691" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1602517765563">
+      <screen x="0" y="32" width="1366" height="736" />
+    </state>
+    <state x="410" y="50" width="526" height="691" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.32.1366.736@0.32.1366.736" timestamp="1602517765563" />
     <state x="416" y="158" width="524" height="480" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1602501770986">
       <screen x="0" y="32" width="1366" height="736" />
     </state>

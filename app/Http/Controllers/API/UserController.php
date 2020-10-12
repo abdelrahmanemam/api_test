@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\LoginStore;
+use App\Http\Requests\UserStore;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -22,12 +24,11 @@ class UserController extends Controller
         $this->user = $user;
     }
 
-    public function register(Request $request)
+    public function register(UserStore $request)
     {
-        $input = $request->all();
-        $input['password'] = bcrypt($input['password']);
+        $request->offsetSet('password', bcrypt($request->get('password')));
 
-        $this->user->create($input);
+        $this->user->create($request->all());
 
 
         $success['token'] =  $this->user->createToken('MyApp')->accessToken;
@@ -41,7 +42,7 @@ class UserController extends Controller
     * @return \Illuminate\Http\Response
     */
 
-    public function login(Request $request){
+    public function login(LoginStore $request){
 
         if(Auth::attempt($request)){
             $user = Auth::user();
