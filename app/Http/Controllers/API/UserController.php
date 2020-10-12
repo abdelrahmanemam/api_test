@@ -25,6 +25,8 @@ class UserController extends Controller
 
     public function register(UserStore $request)
     {
+
+        //asd
         $request->offsetSet('password', bcrypt($request->get('password')));
 
         $this->user->create($request->all());
