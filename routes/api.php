@@ -32,6 +32,7 @@ Route::group(['namespace' => 'API', 'prefix' => '/user'],function (){
     Route::group(['middleware' => 'auth:api'], function(){
         Route::post('user', 'UserController@user');
         Route::post('admin', 'AdminController@admin');
+        Route::post('logout','UserController@logout');
 
     });
 });
