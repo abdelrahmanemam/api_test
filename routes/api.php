@@ -17,12 +17,22 @@ use Illuminate\Support\Facades\Route;
 //    return $request->user();
 //});
 
-Route::namespace('API')->prefix('/user')->group(function () {
+Route::group(['namespace' => 'API', 'prefix' => '/user'],function (){
 
-    Route::post('login', 'UserController@login');
-    Route::post('register', 'UserController@register');
+//    user auth
+    Route::post('login', 'LoggingController@login')->name('login');
+    Route::post('register', 'RegisterController@register');
+
+
+//    admin auth
+
+    Route::post('admin_login', 'LoggingController@adminLogin')->name('admin.login');
+    Route::post('admin_register', 'AdminRegisterController@register');
+
     Route::group(['middleware' => 'auth:api'], function(){
-        Route::post('all', 'UserController@all');
+        Route::post('user', 'UserController@user');
+        Route::post('admin', 'AdminController@admin');
+
     });
 });
 
