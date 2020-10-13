@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\API;
 
+use App\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\LoginStore;
 use App\Http\Requests\UserStore;
@@ -16,7 +17,7 @@ class LoggingController extends Controller
     {
         $this->user = $user;
         $this->middleware('guest')->except('logout');
-        $this->middleware('guest:admin')->except('logout');
+        $this->middleware('guest:admin-api')->except('logout');
     }
 
     /**
@@ -55,12 +56,14 @@ class LoggingController extends Controller
 
     public function adminLogin(LoginStore $request)
     {
-        //a
-        $credentials = $request->only('email','password');
-        if(Auth::guard('admin')->authenticate($credentials)) {
-
-            return response(['success'=>'Admin Authorised']);
+        $email = $request['email'];
+        $password = $request['password'];
+        $admin = Admin::where('email', $email)->first();
+        if($admin){
+            $success['token'] =  $admin->createToken('MyApp')-> accessToken;
+            return response(['success' => $success]);
         }
+
         return response(['error'=>'Unauthorised']);
     }
 

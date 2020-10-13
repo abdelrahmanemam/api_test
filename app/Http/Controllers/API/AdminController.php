@@ -14,7 +14,7 @@ class AdminController extends Controller
     public function __construct(Admin $admin)
     {
         $this->admin = $admin;
-        $this->middleware('auth:admin');
+        $this->middleware('auth:admin-api');
 
     }
 
