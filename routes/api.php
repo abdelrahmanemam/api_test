@@ -28,7 +28,7 @@ Route::group(['namespace' => 'API', 'prefix' => '/user'],function (){
 
     Route::post('admin_login', 'LoggingController@adminLogin')->name('admin.login');
     Route::post('admin_register', 'AdminRegisterController@register');
-
+    //a
     Route::group(['middleware' => 'auth:api'], function(){
         Route::post('user', 'UserController@user');
         Route::post('admin', 'AdminController@admin');
