@@ -55,6 +55,7 @@ class LoggingController extends Controller
 
     public function adminLogin(LoginStore $request)
     {
+        //a
         $credentials = $request->only('email','password');
         if(Auth::guard('admin')->authenticate($credentials)) {
 
