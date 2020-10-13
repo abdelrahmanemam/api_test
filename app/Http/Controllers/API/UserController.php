@@ -33,10 +33,15 @@ class UserController extends Controller
 
     public function logout()
     {
+        if (!Auth::check()) {
+            return response('you need to sign in first');
+        } else {
+
         DB::table('oauth_access_tokens')
             ->where('user_id', Auth::user()->id)
             ->update([
                 'revoked' => true
             ]);
+    }
     }
 }

@@ -21,8 +21,10 @@ Route::group(['namespace' => 'API', 'prefix' => '/user'],function (){
 
 //    user auth
     Route::post('login', 'LoggingController@login')->name('login');
-    Route::post('register', 'RegisterController@register');
-
+    Route::post('register', 'RegisterController@register')->name('register');
+    Route::get('error', function (){
+        return response()->json(['error' => 'unauthenticated']);
+    })->name('error');
 
 //    admin auth
 
@@ -32,7 +34,7 @@ Route::group(['namespace' => 'API', 'prefix' => '/user'],function (){
     Route::group(['middleware' => 'auth:api'], function(){
         Route::post('user', 'UserController@user');
         Route::post('admin', 'AdminController@admin');
-        Route::post('logout','UserController@logout');
+        Route::post('logout','UserController@logout')->name('logout');
 
     });
 });
