@@ -67,5 +67,20 @@ class LoggingController extends Controller
         return response(['error'=>'Unauthorised']);
     }
 
+    public function refresh(LoginStore $request)
+    {
+        return 1;
+        UserController::logout();
+        $credentials = $request->only('email','password');
+        if(Auth::attempt($credentials)){
+            $user = Auth::user();
+            $success['token'] =  $user->createToken('MyApp')-> accessToken;
+            return response(['success' => $success]);
+        }
+        else{
+            return response(['error'=>'Unauthorised', 401]);
+        }
+    }
+
 
 }
