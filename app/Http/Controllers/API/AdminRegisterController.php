@@ -6,6 +6,7 @@ use App\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UserStore;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class AdminRegisterController extends Controller
 {
@@ -22,6 +23,12 @@ class AdminRegisterController extends Controller
      */
     protected function register(UserStore $request)
     {
+        $email = $request->only('email');
+
+        $exist = DB::select('SELECT * FROM `admins` WHERE `email`= :email',['email'=>$email['email']]);
+
+        if($exist){ return response('email used');}
+
         $request->offsetSet('password', bcrypt($request->get('password')));
 
         $this->admin->create($request->all());

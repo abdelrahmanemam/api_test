@@ -48,7 +48,6 @@ class UserController extends Controller
 
     public function refresh()
     {
-//     a
         $row = DB::select(
             'SELECT `id` FROM `oauth_access_tokens`
                     WHERE `user_id` = :id AND TIMESTAMPADD(second , 15 , `expires_at`) <= NOW()
@@ -62,7 +61,7 @@ class UserController extends Controller
                 ->where('id', $expired_id)
                 ->delete();
 
-            return response('token expired');
+            return response(['error'=>'token expired']);
         }
 
     }
